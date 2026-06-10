@@ -1,10 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native'; 
+
+import { Perfil } from './Perfil';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      
+      <Image 
+        source={require('./assets/wave.png')} 
+        style={styles.logo} 
+      />
+
+      <Text style={styles.helloText}>Hello World</Text>
+      <Text>--------------------</Text>
+      
+      <Perfil nombre="Erik" carrera="Sistemas" materia="Movil" cuatri="9" />
+
       <StatusBar style="auto" />
     </View>
   );
@@ -17,4 +29,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logo: {
+    width: 60,         
+    height: 60,        
+    marginBottom: 10,  
+    resizeMode: 'contain',
+  },
+  helloText: {
+    fontSize: 24,
+    fontWeight: 'normal',
+  }
 });
