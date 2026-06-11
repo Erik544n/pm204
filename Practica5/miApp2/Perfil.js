@@ -1,21 +1,22 @@
 //perfil usando Desestructuracion
 
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import {useState } from "react";
 
 
 
-export const Perfil = ({ nombre, carrera, materia, cuatri }) => {
+export const Perfil = ({ nombre, carrera, materia, cuatri,style }) => {
     const [mostrar, setMostrar] = useState(false);
     return (
-        <View>
-            <Text>{nombre}</Text>
+        //Herencia de estilos
+        <View style={[styles.tarjeta, style]}>
+            <Text style={styles.nombre} >{nombre}</Text>
 
             {mostrar&& 
             <>
-                <Text>{carrera}</Text>
-                <Text>{materia}</Text>
-                <Text>{cuatri}</Text>
+                <Text style={styles.carrera} >{carrera}</Text>
+                <Text style={styles.otroTexto} >{materia}</Text>
+                <Text style={styles.otroTexto} >{cuatri}</Text>
             </>
             }
             <Button title="Ver Perfil" onPress={() => setMostrar(!mostrar)} />
@@ -24,7 +25,36 @@ export const Perfil = ({ nombre, carrera, materia, cuatri }) => {
 
 }
 
+//Estilos
+const styles = StyleSheet.create({
+    nombre:{
+        fontSize: 24,
+        fontWeight: 600,
+        textTransform: 'uppercase',
 
+    },
+    //Creación del contorno 
+    tarjeta:{
+        borderWidth: 2,
+        padding: 15,
+        margin: 10,
+    },
+    carrera:{
+        fontSize:18,
+        color:'red',
+        fontFamily: 'Roboto',
+    },
+
+    otroTexto:{
+        fontSize:12,
+        fontFamily:'Roboto',
+        fontStyle:'italic',
+    },
+
+
+    
+
+});
 
 
 

@@ -7,15 +7,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       
-      <Image 
-        source={require('./assets/wave.png')} 
-        style={styles.logo} 
-      />
+      <Perfil style={styles.tarjetaVerde} nombre="Erik" carrera="Sistemas" materia="Movil" cuatri="9" />
 
-      <Text style={styles.helloText}>Hello World</Text>
-      <Text>--------------------</Text>
-      
-      <Perfil nombre="Erik" carrera="Sistemas" materia="Movil" cuatri="9" />
+      <Perfil 
+      style={styles.tarjetaRojo} 
+      nombre="asdf" 
+      carrera="asdgdf"
+      materia="Movil" 
+      cuatri="9" />
+
+      <Perfil style={styles.tarjetaVerde} nombre="Erik 2" carrera="Sistemas" materia="Movil" cuatri="9" />
+
+
 
       <StatusBar style="auto" />
     </View>
@@ -27,7 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'Space-evenly',
+    flexDirection:'center',
   },
   logo: {
     width: 60,         
@@ -38,5 +42,11 @@ const styles = StyleSheet.create({
   helloText: {
     fontSize: 24,
     fontWeight: 'normal',
-  }
+  },
+  tarjetaVerde:{
+    backgroundColor:'green'
+  },
+  tarjetaRojo:{
+    backgroundColor:'#FF6B6B'
+  },
 });
