@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import MenuScreen from './screens/MenuScreen';
+import { StyleSheet, Text, View, Image } from 'react-native'; 
 
-export default function App() {
+export default function ActivityIndicatorScreen() {
   return (
     <View style={styles.container}>
-      <MenuScreen/>
+    
+        <> Aqui va la practica de ActivityIndicator </>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -21,3 +22,4 @@ const styles = StyleSheet.create({
   },
 
 });
+
