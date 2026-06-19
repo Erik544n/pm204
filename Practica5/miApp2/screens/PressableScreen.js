@@ -1,14 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Switch } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
   const [contador, setContador] = useState(0);
 
+  const [isDark, setIsDark] = useState(false);
+
+  const tema = {
+    fondo: isDark ? '#1a1a2e' : '#eef2ff',
+    texto: isDark ? '#e2e8f0':'#1e293b',
+    tarjeta: isDark ? '#16213e':'#ffffff'
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Práctica Pressable</Text>
-      <Text style={styles.contador}>Presiones: {contador}</Text>
+    <View style={[styles.container, {backgroundColor: tema.fondo}]}>
+      <Text style={[styles.titulo, {color: tema.texto}]}>Práctica Pressable</Text>
+      <Text style={[styles.contador, {color: tema.texto}]}>Presiones: {contador}</Text>
+
+      <Text style={{color: tema.texto, fontSize: 16}}>
+        {isDark ? 'Modo Oscuro' : 'Modo Claro'}
+      </Text>
+      <Switch
+        value={isDark}
+        onValueChange={(value) => setIsDark(value)}
+        trackColor={{false: '#cbd5e1', true:'#6366f1'}}
+        thumbColor={isDark ? '#ffffff': '#f1f5f9'}
+      />
 
       <Pressable
         style={({ pressed }) => [
@@ -30,7 +48,7 @@ export default function App() {
         </Text>
       </Pressable>
 
-      <StatusBar style="auto" />
+      <StatusBar style={isDark ? 'light' : 'dark'} />
     </View>
   );
 }
@@ -38,7 +56,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eef2ff',
     alignItems: 'center',
     justifyContent: 'center',
   },
