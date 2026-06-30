@@ -1,14 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native'; 
+import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native'; 
 
 export default function ImageBackgroundScreen() {
-  return (
-    <View style={styles.container}>
-    
-        <> Aqui va la practica de ImageBackground </>
 
-      <StatusBar style="auto" />
-    </View>
+  const{Imagenindex, setImagenindex} = useState(0);
+  const {blur, setBlur} = useState(0);
+
+  const imagenes = [
+    requiere('../assets/wave.png'),
+    require('../assets/icon.png'),
+    require('../assets/favicon.png'),
+  ]
+  
+
+  return (
+    
+    
+      <ImageBackground source={imagenes[Imagenindex]} 
+      style={styles.container}
+      imageneStyle= {styles.imagen} 
+      blurRadius={blur}/>
+
+      <View style={styles.tarjeta}> 
+      
+      </View>
+    
   );
 }
 
@@ -20,6 +36,6 @@ const styles = StyleSheet.create({
     justifyContent: 'Space-evenly',
     flexDirection:'center',
   },
-
 });
+
 
