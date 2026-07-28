@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers import usuarios
 from app.data.db import engine
 from app.data import usuarioDB
@@ -12,6 +13,15 @@ app = FastAPI(
     title="API usuarios ",
     description="Ivan Isay Guerra",
     version="1.0.0"
+)
+
+# Permite peticiones desde el frontend Expo web
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(usuarios.router)
