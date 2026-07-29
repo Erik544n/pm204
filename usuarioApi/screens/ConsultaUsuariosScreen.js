@@ -1,12 +1,13 @@
-import {SafeAreaView,View,Text,FlatList,StyleSheet,ActivityIndicator} from 'react-native';
-import {useState,useCallback} from 'react';
-import { useFocusEffect } from 'expo-router';
+import { SafeAreaView, View, Text, FlatList, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
+import { useState, useCallback } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { API_URL, TUNNEL_HEADERS } from '../config';
 
 export default function ConsultaUsuariosScreen() {
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [refrescando, setRefrescando] = useState(false);
+  const router = useRouter();
 
   const obtenerUsuarios = async (mostrarCargando = true) => {
     if (mostrarCargando) setCargando(true);
@@ -51,21 +52,33 @@ export default function ConsultaUsuariosScreen() {
     obtenerUsuarios(false);
   };
 
+  const verDetalles = (usuario) => {
+    router.push({
+      pathname: '/detalles',
+      params: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        edad: usuario.edad,
+      },
+    });
+  };
+
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
       <Text style={styles.nombre}>{item.nombre}</Text>
-      <View style={styles.linea}></View>
-      <Text style={styles.info}>
-        Edad: {item.edad} años
-      </Text>
+      <View style={styles.linea} />
+      <View style={styles.cardFooter}>
+        <Text style={styles.info}>Edad: {item.edad} años</Text>
+        <Pressable onPress={() => verDetalles(item)}>
+          <Text style={styles.botonDetalles}>Ver detalles →</Text>
+        </Pressable>
+      </View>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.titulo}>
-        Lista de Usuarios
-      </Text>
+      <Text style={styles.titulo}>Lista de Usuarios</Text>
 
       {cargando && usuarios.length === 0 ? (
         <View style={styles.centro}>
@@ -129,9 +142,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E7EB',
     marginVertical: 10,
   },
+  cardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   info: {
     fontSize: 16,
     color: '#4B5563',
+  },
+  botonDetalles: {
+    fontSize: 14,
+    color: '#2563EB',
+    fontWeight: '600',
   },
   centro: {
     flex: 1,
